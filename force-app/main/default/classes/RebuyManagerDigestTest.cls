@@ -173,6 +173,13 @@ private class RebuyManagerDigestTest {
 
     @IsTest
     static void agendaSemanal() {
+        // Isolamento: se a org já tem o job agendado (produção), aborta antes para o teste ser re-executável.
+        for (CronTrigger existente : [
+            SELECT Id FROM CronTrigger
+            WHERE CronJobDetail.Name = 'Rebuy Radar - resumo semanal do gestor'
+        ]) {
+            System.abortJob(existente.Id);
+        }
         Test.startTest();
         String jobId = RebuyManagerDigest.scheduleWeekly();
         Test.stopTest();
