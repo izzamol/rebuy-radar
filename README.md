@@ -1,7 +1,7 @@
 # Rebuy Radar
 
 Motor de radar de recompra para Salesforce: detecta contas que quebraram o padrão de compra,
-calcula o valor em risco e prioriza a carteira para o time de vendas — antes que o cliente
+calcula o valor em risco e prioriza a carteira para o time de vendas, antes que o cliente
 silencioso vire churn.
 
 > **Cenário de demonstração:** este projeto foi construído para a **Vetra Distribuidora**,
@@ -16,7 +16,7 @@ O Rebuy Radar resolve isso em três passos:
 
 1. **Cálculo noturno**: batch (`RebuyPatternBatch`) analisa o histórico de compras de cada conta
    nos últimos 12 meses e calcula cadência média, próxima compra esperada, dias em atraso.
-2. **Score explicável**: em vez de caixa-preta, cada conta recebe um **score 0-100** que é explícito —
+2. **Score explicável**: em vez de caixa-preta, cada conta recebe um **score 0-100** que é explícito:
    percentual do caminho até o limiar crítico. Vendedor consegue explicar: "você compra a cada 30 dias;
    está com 100 dias sem comprar; 80% do caminho para crítico".
 3. **Visualização por carteira**: LWC lista a carteira em risco, ordenada por criticidade. Sharing nativa:
@@ -26,7 +26,7 @@ O Rebuy Radar resolve isso em três passos:
 
 - **RebuyPatternService**: lógica pura (sem SOQL), testável em unidade com data injetável.
 - **RebuyPatternBatch**: `without sharing` para enxergar carteira inteira; upsert idempotente.
-- **AccountPurchasePatternSelector**: `WITH USER_MODE` — respeita CRUD/FLS/sharing.
+- **AccountPurchasePatternSelector**: `WITH USER_MODE`, respeita CRUD/FLS/sharing.
 - **RebuyRadarController**: thin wrapper, exceções em `AuraHandledException`.
 - **LWC rebuyRadar**: tiles de resumo por nível (cores SLDS), filtro, datatable com conta linkada.
 
@@ -76,4 +76,4 @@ Batch agendável. Seed com 30 contas + 90 compras.
 
 ---
 
-**Witor Lomazzi** — [LinkedIn](https://www.linkedin.com/in/witor-hugo-lomazzi-9309651b8/) | [Portfolio](https://salesforce.flupdigital.com.br)
+**Witor Lomazzi** · [LinkedIn](https://www.linkedin.com/in/witor-hugo-lomazzi-9309651b8/) | [Portfolio](https://salesforce.flupdigital.com.br)
